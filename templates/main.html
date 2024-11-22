@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blogging Application</title>
+    <!-- <link rel="stylesheet" href="{% static 'styles/styles.css' %}"> -->
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #f7d8e0;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            flex: 1;
+        }
+
+        .navbar-link > a {
+            text-decoration: none;
+            color: rgb(118, 41, 53);
+        }
+
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            /* Makes the logo round */
+            vertical-align: middle;
+        }
+
+        .site-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .navbar-user {
+            display: flex;
+            align-items: center;
+            font-variant: small-caps;
+        }
+
+        .user-name {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .avatar-img {
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .navbar-button {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Main Content Styling */
+        .content {
+            padding: 20px;
+        }
+
+        /* link style for usernames */
+        a.author {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Main Content -->
+    <div class="content">
+        {% block content %}
+        <!-- Content from other templates will be injected here -->
+        {% endblock content %}
+    </div>
+</body>
+
+</html>

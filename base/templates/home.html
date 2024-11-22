@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .home-body {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        column-gap: 20px;
+    }
+
+    .post-group {
+        margin: 20px 20px 5px 10px;
+        /* margin-right: 10px; */
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: justify;
+    }
+
+    .post-group h4 {
+        margin-bottom: 10px;
+    }
+
+    .post-group a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .post-date {
+        font-size: 13px;
+        color: #0f0f0f;
+    }
+
+    .post-content {
+        font-size: 14px;
+    }
+
+    hr {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="home-container">
+
+    <div class="home-header">
+        <h2>Welcome, {{ user.username }}!</h2>
+    </div>
+
+    <div class="home-body">
+        <div class="home-feed">
+            <h3>Feed</h3>
+            <hr>
+
+            {% for post in posts %}
+            <div class="post-group">
+                <a href="#"><h4>{{ post.title|title }}</h4></a>
+                <p class="post-date">Published on {{ post.created_at|date }}</p>
+                <hr>
+                <!-- <p>@{{ post.author }}</p> --> <!-- This is the author's username | add when author model is made-->
+                <p class="post-content">{{ post.content|truncatewords:50|linebreaks }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="home-category">
+            <h3>Categories</h3>
+            <hr>
+            <p>There will be categories here!</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
