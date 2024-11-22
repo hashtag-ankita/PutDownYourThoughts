@@ -1,0 +1,15 @@
+# virtual environments
+.venv/
+
+# migrations
+migrations/
+
+# pycache
+__pycache__/
+*.pyc
+
+# database
+db.sqlite3
+
+# static files
+static/
