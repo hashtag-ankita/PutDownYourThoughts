@@ -18,19 +18,27 @@
 
         /* Navbar Styles */
         .navbar {
-            background-color: #f7d8e0;
+            background-color: #2C3E50;
             padding: 10px 20px;
             display: flex;
             align-items: center;
         }
 
+        nav a {
+            color: #cddbea;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
         .navbar-logo {
             flex: 1;
+            padding: 7px;
+            font-size: 30px;
         }
 
         .navbar-link > a {
-            text-decoration: none;
-            color: rgb(118, 41, 53);
+            padding: 15px;
+            font-size: 20px;
         }
 
         .logo-img {
@@ -75,6 +83,7 @@
         /* Main Content Styling */
         .content {
             padding: 20px;
+            background-color: #c8e4ec;
         }
 
         /* link style for usernames */
@@ -82,6 +91,10 @@
             text-decoration: none;
         }
     </style>
+
+    {% block extra_styles %}
+    <!-- Extra styles from other templates will be injected here -->
+    {% endblock extra_styles %}
 </head>
 
 <body>

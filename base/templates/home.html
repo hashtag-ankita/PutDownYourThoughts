@@ -2,7 +2,19 @@
 
 {% block content %}
 
+{% block extra_styles %}
 <style>
+    /* body {
+        background-color: #90d1e2;
+    } */
+
+    .home-header {
+        text-align: center;
+        margin: 20px 0px 20px 0px;
+        font-size: 18px;
+        color: #243647;
+    }
+
     .home-body {
         display: grid;
         grid-template-columns: 3fr 1fr;
@@ -10,62 +22,139 @@
     }
 
     .post-group {
-        margin: 20px 20px 5px 10px;
+        margin: 20px 20px 20px 20px;
         /* margin-right: 10px; */
         border: 1px solid #ccc;
         padding: 10px;
         text-align: justify;
+        background-color: #acc6d8;
+        border-radius: 15px;
+        border: #788ca0 5px groove;
+        width: 90%;
     }
 
-    .post-group h4 {
+    h4 {
         margin-bottom: 10px;
+        font-size: 20px;
+        color: #2C3E50;
     }
 
     .post-group a {
         text-decoration: none;
-        color: black;
+        color: #2C3E50;
     }
 
     .post-date {
         font-size: 13px;
-        color: #0f0f0f;
+        color: #243647;
     }
 
     .post-content {
         font-size: 14px;
     }
 
+    .read-more {
+        color: #214161;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
     hr {
         margin-bottom: 10px;
+        background-color: #2C3E50;
+        border-style: solid;
+    }
+
+    .home-sidebar {
+        text-align: center;
+        color: #243647;
+    }
+
+    .home-qotd, .home-potd {
+        margin: 20px 0px 20px 0px;
+    }
+
+    .qotd-header, .potd-header {
+        margin: 15px 0px 10px 0px;
+    }
+
+    .qotd-quote {
+        font-style: italic;
+        font-size: 16px;
+    }
+
+    .qotd-author, .potd-author {
+        font-size: 14px;
+        margin-top: 10px;
+        color: #243647;
+    }
+
+    .home-potd > a {
+        text-decoration: none;
+    }
+
+    .potd-title {
+        font-size: 17px;
+        font-weight: bold;
+        color: #2C3E50;
+    }
+
+    .potd-content-preview {
+        font-size: 14px;
+        text-align: justify;
+        margin: 10px;
     }
 </style>
+{% endblock extra_styles %}
 
 <div class="home-container">
 
     <div class="home-header">
-        <h2>Welcome, {{ user.username }}!</h2>
+        <h2>Welcome back, {{ user.username }}!</h2>
+        <h4>Let's start blogging...</h4>
     </div>
 
     <div class="home-body">
         <div class="home-feed">
-            <h3>Feed</h3>
+            <!-- <h3>Feed</h3> -->
             <hr>
 
             {% for post in posts %}
             <div class="post-group">
-                <a href="#"><h4>{{ post.title|title }}</h4></a>
+                <a href="#">
+                    <h4>{{ post.title|title }}</h4>
+                </a>
                 <p class="post-date">Published on {{ post.created_at|date }}</p>
                 <hr>
                 <!-- <p>@{{ post.author }}</p> --> <!-- This is the author's username | add when author model is made-->
-                <p class="post-content">{{ post.content|truncatewords:50|linebreaks }}</p>
+                <p class="post-content">{{ post.content|truncatewords:50|linebreaks }}<a href="#" class="read-more">Read more</a></p>
             </div>
             {% endfor %}
         </div>
-
-        <div class="home-category">
-            <h3>Categories</h3>
+        
+        <div class="home-sidebar">
             <hr>
-            <p>There will be categories here!</p>
+            <div class="home-qotd">
+                <h4 class="qotd-header">Quote of the day</h4>
+                <!-- placeholder quote -->
+                <p class="qotd-quote">"The value of an idea lies in the use of it."</p>
+                <p class="qotd-author">- Thomas Edison</p>
+                <!-- I will add daily quotes via API later -->
+            </div>
+
+            <div class="home-potd">
+                <h4 class="potd-header">Post of the day</h4>
+                <!-- placeholder post -->
+                <a href="#">
+                    <p class="potd-title">A post title</p>
+                </a>
+                <!-- This is the post's title and will link to the post | add when potd mechanism is figured out -->
+                <a href="#">
+                    <p class="potd-author">- Author</p>
+                </a> <!-- This is the author's username and will link to it | add when author model is made-->
+                <p class="potd-content-preview">Lorem ipsum dolor sit amet consectetur adipisicing elit... <a href="#"
+                        class="read-more">Read more</a></p>
+            </div>
         </div>
     </div>
 </div>
