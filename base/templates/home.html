@@ -12,7 +12,7 @@
         text-align: center;
         margin: 20px 0px 20px 0px;
         font-size: 18px;
-        color: #243647;
+        color: #3d5a80;
     }
 
     .home-body {
@@ -24,19 +24,18 @@
     .post-group {
         margin: 20px 20px 20px 20px;
         /* margin-right: 10px; */
-        border: 1px solid #ccc;
-        padding: 10px;
+        padding: 15px;
         text-align: justify;
-        background-color: #acc6d8;
+        background-color: #FFFFFF;
         border-radius: 15px;
-        border: #788ca0 5px groove;
+        /* border: #788ca0 5px groove; */
         width: 90%;
     }
 
     h4 {
         margin-bottom: 10px;
         font-size: 20px;
-        color: #2C3E50;
+        color: #293241;
     }
 
     .post-group a {
@@ -44,9 +43,13 @@
         color: #2C3E50;
     }
 
+    /* .post-title {
+        color: #3d5a80;
+    } */
+
     .post-date {
         font-size: 13px;
-        color: #243647;
+        color: #3d5a80;
     }
 
     .post-content {
@@ -61,13 +64,16 @@
 
     hr {
         margin-bottom: 10px;
-        background-color: #2C3E50;
+        background-color: #293241;
         border-style: solid;
+        border-width: 1px;
     }
 
     .home-sidebar {
         text-align: center;
         color: #243647;
+        background-color: #98c1d9;
+        border-radius: 10%;
     }
 
     .home-qotd, .home-potd {
@@ -117,12 +123,12 @@
     <div class="home-body">
         <div class="home-feed">
             <!-- <h3>Feed</h3> -->
-            <hr>
+            <!-- <hr> -->
 
             {% for post in posts %}
             <div class="post-group">
                 <a href="#">
-                    <h4>{{ post.title|title }}</h4>
+                    <h4 class="post-title">{{ post.title|title }}</h4>
                 </a>
                 <p class="post-date">Published on {{ post.created_at|date }}</p>
                 <hr>
@@ -133,7 +139,7 @@
         </div>
         
         <div class="home-sidebar">
-            <hr>
+            <!-- <hr> -->
             <div class="home-qotd">
                 <h4 class="qotd-header">Quote of the day</h4>
                 <!-- placeholder quote -->
