@@ -8,6 +8,7 @@
         background-color: #90d1e2;
     } */
 
+    /* styling for the feed_component.html */
     .home-header {
         text-align: center;
         margin: 20px 0px 20px 0px;
@@ -19,6 +20,39 @@
         display: grid;
         grid-template-columns: 3fr 1fr;
         column-gap: 20px;
+    }
+
+    .start-blog-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .start-blog-link {
+        text-decoration: none;
+    }
+
+    .start-blog-box {
+        width: 60%;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 2px solid #98c1d9;
+        border-radius: 5px;
+        cursor: pointer;
+        /* color: #3d5a80; */
+        background-color: #f9f9f9;
+    }
+
+    .start-blog-box:hover {
+        border-color: #3d5a80;
+    }
+
+    .start-blog-box:focus {
+        outline: none;
+        border-color: #5c9ead;
+    }
+
+    .start-blog-box[readonly] {
+        cursor: pointer;
     }
 
     .post-group {
@@ -69,6 +103,7 @@
         border-width: 1px;
     }
 
+    /* styling for the sidebar_component.html */
     .home-sidebar {
         text-align: center;
         color: #243647;
@@ -76,11 +111,13 @@
         border-radius: 10%;
     }
 
-    .home-qotd, .home-potd {
+    .home-qotd,
+    .home-potd {
         margin: 20px 0px 20px 0px;
     }
 
-    .qotd-header, .potd-header {
+    .qotd-header,
+    .potd-header {
         margin: 15px 0px 10px 0px;
     }
 
@@ -89,13 +126,14 @@
         font-size: 16px;
     }
 
-    .qotd-author, .potd-author {
+    .qotd-author,
+    .potd-author {
         font-size: 14px;
         margin-top: 10px;
         color: #243647;
     }
 
-    .home-potd > a {
+    .home-potd>a {
         text-decoration: none;
     }
 
@@ -117,50 +155,20 @@
 
     <div class="home-header">
         <h2>Welcome back, {{ user.username }}!</h2>
-        <h4>Let's start blogging...</h4>
+        <div class="start-blog-container">
+            <a href="{% url 'create-post' %}" class="start-blog-link">
+                <input type="text" placeholder="Start your blog here..." readonly class="start-blog-box">
+            </a>
+        </div>
     </div>
 
     <div class="home-body">
         <div class="home-feed">
-            <!-- <h3>Feed</h3> -->
-            <!-- <hr> -->
-
-            {% for post in posts %}
-            <div class="post-group">
-                <a href="#">
-                    <h4 class="post-title">{{ post.title|title }}</h4>
-                </a>
-                <p class="post-date">Published on {{ post.created_at|date }}</p>
-                <hr>
-                <!-- <p>@{{ post.author }}</p> --> <!-- This is the author's username | add when author model is made-->
-                <p class="post-content">{{ post.content|truncatewords:50|linebreaks }}<a href="#" class="read-more">Read more</a></p>
-            </div>
-            {% endfor %}
+            {% include 'feed_component.html' %}
         </div>
-        
-        <div class="home-sidebar">
-            <!-- <hr> -->
-            <div class="home-qotd">
-                <h4 class="qotd-header">Quote of the day</h4>
-                <!-- placeholder quote -->
-                <p class="qotd-quote">"The value of an idea lies in the use of it."</p>
-                <p class="qotd-author">- Thomas Edison</p>
-                <!-- I will add daily quotes via API later -->
-            </div>
 
-            <div class="home-potd">
-                <h4 class="potd-header">Post of the day</h4>
-                <!-- placeholder post -->
-                <a href="#">
-                    <p class="potd-title">A post title</p>
-                </a>
-                <!-- This is the post's title and will link to the post | add when potd mechanism is figured out -->
-                <a href="#">
-                    <p class="potd-author">- Author</p>
-                </a> <!-- This is the author's username and will link to it | add when author model is made-->
-                <p class="potd-content-preview">Lorem ipsum dolor sit amet consectetur adipisicing elit... <a href="#"
-                        class="read-more">Read more</a></p>
-            </div>
+        <div class="home-sidebar">
+            {% include 'sidebar_component.html' %}
         </div>
     </div>
 </div>

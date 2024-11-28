@@ -1,7 +1,176 @@
 {% extends 'main.html' %}
 
+{% block extra_styles %}
+
+<style>
+    .create-post-header {
+        text-align: center;
+        margin: 20px 0px 20px 0px;
+        font-size: 24px;
+        color: #3d5a80;
+    }
+
+    /* Form Container */
+    form {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        /* White for a clean form background */
+        border: 2px solid #98c1d9;
+        /* Powder Blue for soft border accent */
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    form:hover {
+        box-shadow: 0px 4px 6px #293241;
+    }
+
+    /* Form Fields */
+    form input[type="text"],
+    form textarea,
+    form select {
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        border: 1px solid #98c1d9;
+        /* Powder Blue for field border */
+        border-radius: 5px;
+        background-color: #e0fbfc;
+        /* Light Cyan for a subtle field background */
+        color: #293241;
+        /* Gunmetal for text contrast */
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    form input[type="text"]:hover,
+    form textarea:hover,
+    form select:hover {
+        background-color: #ffffff;
+        /* White for hover effect */
+        border-color: #3d5a80;
+        /* YinMin Blue for hover border accent */
+    }
+
+    /* Button Styling */
+    form button[type="submit"] {
+        background-color: #3d5a80;
+        /* YinMin Blue as the primary button color */
+        color: #ffffff;
+        /* White for button text */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    /* Button Hover Effect */
+    form button[type="submit"]:hover {
+        opacity: 0.8;
+        /* Powder Blue for hover effect */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Datalist Styling */
+    datalist {
+        font-size: 16px;
+        color: #293241;
+        /* Gunmetal for better contrast */
+    }
+
+    /* Focus Effect for Input Fields */
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+        outline: none;
+        border: 1px solid #3d5a80;
+        /* YinMin Blue to highlight active fields */
+        background-color: #ffffff;
+        /* White for focus clarity */
+    }
+
+    /* Submit Button Spacing */
+    button.btn,
+    a.btn {
+        display: inline-block;
+    }
+
+    /* Button Spacing */
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        form {
+            padding: 15px;
+        }
+
+        form button[type="submit"] {
+            width: 100%;
+            /* Full-width button on smaller screens */
+        }
+    }
+
+    /* Cancel Button */
+    form a.btn-secondary {
+        background-color: #ee6c4d;
+        /* Burnt Sienna for cancel button */
+        color: #ffffff;
+        /* White text for contrast */
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        margin-left: 10px;
+        transition: all 0.3s ease;
+    }
+
+    /* Cancel Button Hover */
+    form a.btn-secondary:hover {
+        opacity: 0.8;
+        /* YinMin Blue on hover */
+    }
+</style>
+
+{% endblock extra_styles %}
+
 {% block content %}
 
-Hello! This is the create post page.
+<div class="create-post-container">
+    <form action="" method="POST">
+        <h2 class="create-post-header">Create a new blog post</h2>
+        {% csrf_token %}
+        {% for field in form %}
+        <div>
+            {{ field.label_tag }}
+            {{ field }}
+            <!-- Remove error display by not rendering field.errors -->
+        </div>
+        {% endfor %}
+
+        <!-- Datalist for category -->
+        <datalist id="category-options">
+            {% for category in categories %}
+            <option value="{{ category.name }}">
+                {% endfor %}
+        </datalist>
+
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Submit Post</button>
+
+            <!-- Cancel Button -->
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
 
 {% endblock %}
