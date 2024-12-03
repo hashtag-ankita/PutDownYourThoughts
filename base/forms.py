@@ -36,11 +36,11 @@ class PostForm(ModelForm):
         })
     )
 
-    # def clean_tags(self):
-    #     '''Optional: Validate and process the tags field.'''
-    #     tags_input = self.cleaned_data.get('tags', '')
-    #     tags_list = [tag.strip() for tag in tags_input.split(',') if tag.strip()]
-    #     return tags_list # return a list of clean tags
+    def clean_tags(self):
+        '''Optional: Validate and process the tags field.'''
+        tags_input = self.cleaned_data.get('tags', '')
+        tags_list = [tag.strip() for tag in tags_input.split(',') if tag.strip()]
+        return tags_list # return a list of clean tags
     
     # def clean_category(self):
     #     '''Optional: Validate and process the category field.'''

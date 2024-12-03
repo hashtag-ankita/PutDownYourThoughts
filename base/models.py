@@ -30,7 +30,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)  # Uncomment and use User model when ready.
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    tags = models.ManyToManyField(Tag, blank=True)  # Allow blank for posts without tags.
+    tags = models.ManyToManyField(Tag, blank=True, related_name='posts')  # Allow blank for posts without tags.
     created_at = models.DateTimeField(auto_now_add=True)  # Corrected the typo (DataTimeField -> DateTimeField)
     '''Add updated_at field when implementing edit feature for blogs'''
     # updated_at = models.DateTimeField(auto_now=True)
