@@ -80,6 +80,25 @@
         background-color: var(--background-color);
     }
 
+    .category-message {
+        display: block;
+        /* Ensures it appears on a new line */
+        margin-top: 8px;
+        /* Adds a small gap above the message */
+        font-size: 0.9rem;
+        /* Slightly smaller font size */
+        color: #293241;
+        /* Neutral, subtle color for the message */
+    }
+
+    .category-message .add-category {
+        color: #007bff;
+        /* Link color (matches Bootstrap's primary color) */
+        text-decoration: none;
+        /* Removes underline for the link */
+        cursor: pointer;
+    }
+
     /* Button Styling */
     .button-container {
         text-align: center;
@@ -156,6 +175,9 @@
         <div class="form-group">
             <label class="form-label" for="id_category">Category</label>
             {{ form.category }}
+            <span class="category-message">Can't find a suitable category for your blog? Add one: <a href="{% url 'add-category' %}"
+                    class="add-category">Add new category</a></span>
+            <br>
         </div>
 
         <div class="form-group">

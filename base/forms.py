@@ -53,3 +53,22 @@ class PostForm(ModelForm):
     #     if not category_input:
     #         raise ValidationError("Category cannot be empty!")
     #     return category_input.lower() # return the clean category
+
+
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+    name = CharField(
+        widget=TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter the category name',
+        })
+    )
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name').strip() # Get & clean input
+        if Category.objects.filter(name__iexact=name).exists(): # Case-insensitive check
+            raise ValidationError("This category name already exists!")
+        return name # Return the clean name

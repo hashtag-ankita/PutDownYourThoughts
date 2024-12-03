@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Post, Category, Tag
-from .forms import PostForm
+from .forms import PostForm, CategoryForm
 
 # Create your views here.
 def home(request):
@@ -54,3 +54,26 @@ def createPost(request):
     else:
         form = PostForm()
         return render(request, 'create_post.html', {'form': form})
+    
+
+def addCategory(request):
+    """
+    Render the add category page.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse object with the rendered add category page.
+    """
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = CategoryForm()
+
+    context = {'form': form}
+    return render(request, 'add_category.html', context)
