@@ -1,0 +1,195 @@
+{% extends 'main.html' %}
+
+{% block extra_styles %}
+
+<style>
+    :root {
+        /* Color variables */
+        --primary-color: #3d5a80;
+        /* YinMin Blue */
+        --secondary-color: #ee6c4d;
+        /* Burnt Sienna */
+        --border-color: #98c1d9;
+        /* Powder Blue */
+        --background-color: #ffffff;
+        /* White */
+        --hover-opacity: 0.8;
+    }
+
+    /* Form Header */
+    .create-post-header {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 24px;
+        color: var(--primary-color);
+    }
+
+    /* Form Container */
+    form {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: var(--background-color);
+        border: 2px solid var(--border-color);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    form:hover {
+        box-shadow: 0 4px 6px var(--primary-color);
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 18px;
+        color: var(--primary-color);
+    }
+
+    /* Form Fields */
+    form input[type="text"],
+    form textarea,
+    form select {
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        background-color: #e0fbfc;
+        /* Light Cyan */
+        color: #293241;
+        /* Gunmetal */
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    form input[type="text"]:hover,
+    form textarea:hover,
+    form select:hover {
+        background-color: var(--background-color);
+        border-color: var(--primary-color);
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+        outline: none;
+        border: 1px solid var(--primary-color);
+        background-color: var(--background-color);
+    }
+
+    .category-message {
+        display: block;
+        /* Ensures it appears on a new line */
+        margin-top: 8px;
+        /* Adds a small gap above the message */
+        font-size: 0.9rem;
+        /* Slightly smaller font size */
+        color: #293241;
+        /* Neutral, subtle color for the message */
+    }
+
+    .category-message .add-category {
+        color: #007bff;
+        /* Link color (matches Bootstrap's primary color) */
+        text-decoration: none;
+        /* Removes underline for the link */
+        cursor: pointer;
+    }
+
+    /* Button Styling */
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    button.btn,
+    a.btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    button[type="submit"] {
+        background-color: var(--primary-color);
+        color: var(--background-color);
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover,
+    a.btn-secondary:hover {
+        opacity: var(--hover-opacity);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    a.btn-secondary {
+        background-color: var(--secondary-color);
+        color: var(--background-color);
+        text-decoration: none;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .button-container {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button.btn,
+        a.btn {
+            width: 100%;
+        }
+</style>
+
+{% endblock extra_styles %}
+
+{% block content %}
+
+<div class="create-post-container">
+    <form action="" method="POST">
+        <h2 class="create-post-header">Create a New Post</h2>
+
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+            <label class="form-label" for="id_title">Title</label>
+            {{ form.title }}
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="id_content">Content</label>
+            {{ form.content }}
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="id_category">Category</label>
+            {{ form.category }}
+            <span class="category-message">Can't find a suitable category for your blog? Add one: <a href="{% url 'add-category' %}"
+                    class="add-category">Add new category</a></span>
+            <br>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="id_tags">Tags</label>
+            {{ form.tags }}
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

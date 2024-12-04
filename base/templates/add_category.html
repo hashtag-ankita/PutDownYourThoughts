@@ -1,0 +1,120 @@
+{% extends 'main.html' %}
+
+{% block extra_styles %}
+
+<style>
+    /* Container styling */
+    .add-category-container {
+        background-color: #e0fbfc;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 30px auto; /* Center the container */
+    }
+
+    /* Header styling */
+    .add-category-header {
+        font-size: 24px;
+        color: #3d5a80;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+        border-bottom: 2px solid #293241;
+        padding-bottom: 10px;
+    }
+
+    /* Form Styling */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #98c1d9;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #293241;
+        background-color: #ffffff;
+    }
+
+    input:hover {
+        border-color: #3d5a80;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #3d5a80;
+        box-shadow: 0 0 5px rgba(61, 90, 128, 0.3);
+    }
+
+    /* Error message styling */
+    .form-error small {
+        font-size: 14px;
+        color: #ee6c4d;
+        margin-top: 5px;
+        display: block;
+    }
+
+    /* Button styling */
+    .add-category-button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        color: #ffffff;
+        background-color: #3d5a80;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-category-button:hover {
+        background-color: #98c1d9;
+    }
+
+    @media (max-width: 768px) {
+        .add-category-container {
+            padding: 15px;
+            margin: 20px;
+        }
+
+        .add-category-header {
+            font-size: 20px;
+        }
+
+        .add-category-button {
+            font-size: 14px;
+            padding: 10px;
+        }
+    }
+</style>
+
+{% endblock extra_styles %}
+
+{% block content %}
+
+<div class="add-category-container">
+    <form action="" method="POST">
+        <h2 class="add-category-header">Add a new category:</h2>
+
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+            {{ form.name }}
+            <div class="form-error">
+                {% if form.name.errors %}
+                <small class="text-danger">{{ form.name.errors.0 }}</small>
+                {% endif %}
+            </div>
+        </div>
+
+        <button type="submit" class="add-category-button">Add Category</button>
+    </form>
+</div>
+
+{% endblock content %}

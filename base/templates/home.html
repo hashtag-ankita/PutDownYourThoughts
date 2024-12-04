@@ -1,0 +1,183 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% block extra_styles %}
+<style>
+    /* body {
+        background-color: #90d1e2;
+    } */
+
+    /* styling for the feed_component.html */
+    .home-header {
+        text-align: center;
+        margin: 20px 0px 20px 0px;
+        font-size: 18px;
+        color: #3d5a80;
+    }
+
+    .home-body {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        column-gap: 20px;
+    }
+
+    .start-blog-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .start-blog-link {
+        text-decoration: none;
+    }
+
+    .start-blog-box {
+        width: 60%;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 2px solid #98c1d9;
+        border-radius: 5px;
+        cursor: pointer;
+        /* color: #3d5a80; */
+        background-color: #f9f9f9;
+    }
+
+    .start-blog-box:hover {
+        border-color: #3d5a80;
+    }
+
+    .start-blog-box:focus {
+        outline: none;
+        border-color: #5c9ead;
+    }
+
+    .start-blog-box[readonly] {
+        cursor: pointer;
+    }
+
+    .post-group {
+        margin: 20px 20px 20px 20px;
+        /* margin-right: 10px; */
+        padding: 15px;
+        text-align: justify;
+        background-color: #FFFFFF;
+        border-radius: 15px;
+        /* border: #788ca0 5px groove; */
+        width: 90%;
+    }
+
+    h4 {
+        margin-bottom: 5px;
+        font-size: 20px;
+        color: #293241;
+    }
+
+    .post-group a {
+        text-decoration: none;
+        color: #2C3E50;
+    }
+
+    /* .post-title {
+        color: #3d5a80;
+    } */
+
+    .post-author {
+        font-size: 15px;
+        color: #293241;
+        margin: 5px 0px 5px 0px;
+        font-weight: bold;
+    }
+
+    .post-date {
+        font-size: 13px;
+        color: #3d5a80;
+    }
+
+    .post-content {
+        font-size: 14px;
+    }
+
+    .read-more {
+        color: #214161;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    hr {
+        margin-bottom: 10px;
+        background-color: #293241;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    /* styling for the sidebar_component.html */
+    .home-sidebar {
+        text-align: center;
+        color: #243647;
+        background-color: #98c1d9;
+        border-radius: 10px;
+    }
+
+    .home-qotd,
+    .home-potd {
+        margin: 20px 0px 20px 0px;
+    }
+
+    .qotd-header,
+    .potd-header {
+        margin: 15px 0px 10px 0px;
+    }
+
+    .qotd-quote {
+        font-style: italic;
+        font-size: 16px;
+    }
+
+    .qotd-author,
+    .potd-author {
+        font-size: 14px;
+        margin-top: 10px;
+        color: #243647;
+    }
+
+    .home-potd>a {
+        text-decoration: none;
+    }
+
+    .potd-title {
+        font-size: 17px;
+        font-weight: bold;
+        color: #2C3E50;
+    }
+
+    .potd-content-preview {
+        font-size: 14px;
+        text-align: justify;
+        margin: 10px;
+    }
+</style>
+{% endblock extra_styles %}
+
+<div class="home-container">
+
+    <div class="home-header">
+        <h2>Welcome back, {{ user.username }}!</h2>
+        <div class="start-blog-container">
+            <a href="{% url 'create-post' %}" class="start-blog-link">
+                <input type="text" placeholder="Start your blog here..." readonly class="start-blog-box">
+            </a>
+        </div>
+    </div>
+
+    <div class="home-body">
+        <div class="home-feed">
+            {% include 'feed_component.html' %}
+        </div>
+
+        <div class="home-sidebar">
+            {% include 'sidebar_component.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
